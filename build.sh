@@ -4,8 +4,12 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 CONFIG="${1:-release}"
-swift build -c "$CONFIG"
-BIN="$(swift build -c "$CONFIG" --show-bin-path)/Notepad"
+# Apple Silicon + Intel 유니버설 바이너리
+for ARCH in arm64 x86_64; do
+  swift build -c "$CONFIG" --triple "$ARCH-apple-macosx13.0"
+done
+BIN=".build/notepad-universal"
+lipo -create -output "$BIN" ".build/arm64-apple-macosx/$CONFIG/Notepad" ".build/x86_64-apple-macosx/$CONFIG/Notepad"
 
 APP="build/notepad.app"
 rm -rf "$APP"
@@ -53,4 +57,11 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 PLIST
 
 codesign --force --deep --sign - "$APP" >/dev/null 2>&1 || true
+
+# 배포용 zip (GitHub Releases / Homebrew)
+VERSION="$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || true)"
+ZIP="build/notepad-${VERSION:-dev}.zip"
+rm -f "$ZIP"
+ditto -c -k --keepParent "$APP" "$ZIP"
 echo "완료: $APP"
+echo "배포용: $ZIP"

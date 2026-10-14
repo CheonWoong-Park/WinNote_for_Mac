@@ -30,6 +30,16 @@
 
 ## 설치
 
+### Homebrew
+
+```bash
+brew install --cask cheonwoong-park/tap/winnote
+```
+
+설치하면 응용 프로그램 폴더에 `notepad`가 생깁니다. 업데이트는 `brew upgrade --cask winnote`로 하면 됩니다.
+
+### 직접 빌드
+
 macOS 13 이상, Xcode Command Line Tools가 필요합니다.
 
 ```bash
