@@ -1,0 +1,7 @@
+.build/
+build/
+.DS_Store
+.swiftpm/
+
+# 원본 Windows 메모장 패키지 (빌드에 필요 없음)
+WindowsNotepad.zip
