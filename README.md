@@ -51,6 +51,14 @@ open build/notepad.app
 
 `build/notepad.app`을 응용 프로그램 폴더로 옮기면 끝입니다.
 
+## 배포 (관리자용)
+
+```bash
+./release.sh 1.0.1
+```
+
+태그 생성, 빌드, GitHub Release 업로드, Homebrew tap 갱신까지 한 번에 처리합니다.
+
 ## 라이선스
 
 소스 코드는 [MIT 라이선스](LICENSE)를 따릅니다.
