@@ -269,10 +269,10 @@ final class SettingsPage: NSView {
                                   trailing: toggle({ st.autoCorrect }, { st.autoCorrect = $0 })), 4))
 
         // 메모장 시작
-        rows.append((section("메모장 시작"), 28))
+        rows.append((section("notepad 시작"), 28))
         let startupNames = ["이전 세션 계속", "새 세션 시작 및 저장되지 않은 변경 내용 삭제"]
         let (sb, sh) = radioGroup(startupNames, selected: st.startupRestore ? 0 : 1) { i in st.startupRestore = i == 0 }
-        startupCard = ExpanderCard(glyph: .document, title: "메모장이 시작되는 경우", desc: "메모장을 시작할 때 표시되는 내용 선택", body: sb, bodyHeight: sh) {
+        startupCard = ExpanderCard(glyph: .document, title: "notepad가 시작되는 경우", desc: "notepad를 시작할 때 표시되는 내용 선택", body: sb, bodyHeight: sh) {
             Settings.shared.startupRestore ? "이전 세션 계속" : "새 세션 시작"
         }
         rows.append((startupCard, 8))
@@ -290,7 +290,7 @@ final class SettingsPage: NSView {
 
         // 정보
         rows.append((section("이 앱 정보"), 28))
-        let about = SettingsCard(glyph: .info, title: "메모장 11.2607.14.0", desc: "Windows 11 메모장의 macOS 이식판")
+        let about = SettingsCard(glyph: .info, title: "notepad 11.2607.14.0", desc: "Windows 11 메모장의 macOS 이식판")
         rows.append((about, 8))
 
         for card in [themeCard!, fontCard!, startupCard!, openCard!] {

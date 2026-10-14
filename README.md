@@ -1,13 +1,13 @@
-# 메모장 for Mac
+# WinNote for Mac
 
-![메모장 for Mac](docs/screenshot.png)
+![WinNote for Mac](docs/screenshot.png)
 
 맥북 텍스트 편집기, 불편하지 않으셨나요?
 
 만년 윈도우 유저로 살다가 이번에 맥으로 넘어왔는데, 기본 텍스트 편집기에는 도저히 적응이 안 되더라고요.
 붙여넣을 때마다 서식이 따라오고, 메모 하나 쓰려고 해도 손에 익지 않았습니다.
 
-그래서 만들었습니다. **Windows 11 메모장을 그대로 맥으로 옮겼습니다.** 특유의 모난 디자인까지 전부요.
+그래서 만들었습니다. **Windows 11 메모장을 그대로 맥으로 옮긴 `notepad`입니다.** 특유의 모난 디자인까지 전부요.
 
 ## 특징
 
@@ -33,13 +33,13 @@
 macOS 13 이상, Xcode Command Line Tools가 필요합니다.
 
 ```bash
-git clone <이 저장소 주소>
-cd notepad_win
+git clone https://github.com/CheonWoong-Park/WinNote_for_Mac.git
+cd WinNote_for_Mac
 ./build.sh
-open "build/메모장.app"
+open build/notepad.app
 ```
 
-`build/메모장.app`을 응용 프로그램 폴더로 옮기면 끝입니다.
+`build/notepad.app`을 응용 프로그램 폴더로 옮기면 끝입니다.
 
 ## 라이선스
 

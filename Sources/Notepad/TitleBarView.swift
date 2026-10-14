@@ -134,7 +134,7 @@ final class TitleBarView: NSView {
         p.lineWidth = 1.1; p.lineCapStyle = .round; p.lineJoinStyle = .round
         Theme.textPrimary.setStroke(); p.stroke()
         Theme.appIcon.draw(in: NSRect(x: 56, y: 14, width: 16, height: 16), from: .zero, operation: .sourceOver, fraction: 1, respectFlipped: true, hints: nil)
-        drawText("메모장", x: 84, centerY: 22, font: Theme.ui(12), color: Theme.textPrimary)
+        drawText("notepad", x: 84, centerY: 22, font: Theme.ui(12), color: Theme.textPrimary)
     }
 
     private func selectedTabPath(_ r: NSRect) -> NSBezierPath {

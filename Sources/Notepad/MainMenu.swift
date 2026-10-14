@@ -20,18 +20,18 @@ enum MainMenu {
         let f3 = String(UnicodeScalar(NSF3FunctionKey)!)
         let f5 = String(UnicodeScalar(NSF5FunctionKey)!)
 
-        let app = submenu("메모장", [
-            item("메모장 정보", #selector(AppDelegate.showAbout(_:))),
+        let app = submenu("notepad", [
+            item("notepad 정보", #selector(AppDelegate.showAbout(_:))),
             .separator(),
             item("설정...", #selector(AppDelegate.openSettingsFromMenu(_:)), ","),
             .separator(),
             submenu("서비스", []),
             .separator(),
-            item("메모장 가리기", #selector(NSApplication.hide(_:)), ""),
+            item("notepad 가리기", #selector(NSApplication.hide(_:)), ""),
             item("기타 가리기", #selector(NSApplication.hideOtherApplications(_:)), "h", [.command, .option]),
             item("모두 보기", #selector(NSApplication.unhideAllApplications(_:))),
             .separator(),
-            item("메모장 종료", #selector(NSApplication.terminate(_:)), "q"),
+            item("notepad 종료", #selector(NSApplication.terminate(_:)), "q"),
         ])
         NSApp.servicesMenu = app.submenu?.item(withTitle: "서비스")?.submenu
         main.addItem(app)

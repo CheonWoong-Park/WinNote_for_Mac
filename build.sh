@@ -1,5 +1,5 @@
 #!/bin/bash
-# 메모장.app 빌드 스크립트
+# notepad.app 빌드 스크립트
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -7,10 +7,10 @@ CONFIG="${1:-release}"
 swift build -c "$CONFIG"
 BIN="$(swift build -c "$CONFIG" --show-bin-path)/Notepad"
 
-APP="build/메모장.app"
+APP="build/notepad.app"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources/Fonts" "$APP/Contents/Resources/Images"
-cp "$BIN" "$APP/Contents/MacOS/Notepad"
+cp "$BIN" "$APP/Contents/MacOS/notepad"
 cp Resources/Fonts/*.ttf "$APP/Contents/Resources/Fonts/"
 cp Resources/Images/*.png "$APP/Contents/Resources/Images/"
 cp Resources/AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
@@ -21,10 +21,10 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key><string>ko</string>
-    <key>CFBundleExecutable</key><string>Notepad</string>
-    <key>CFBundleIdentifier</key><string>local.notepad.win11</string>
-    <key>CFBundleName</key><string>메모장</string>
-    <key>CFBundleDisplayName</key><string>메모장</string>
+    <key>CFBundleExecutable</key><string>notepad</string>
+    <key>CFBundleIdentifier</key><string>com.cheonwoong.winnote</string>
+    <key>CFBundleName</key><string>notepad</string>
+    <key>CFBundleDisplayName</key><string>notepad</string>
     <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>CFBundlePackageType</key><string>APPL</string>
     <key>CFBundleShortVersionString</key><string>11.2607.14</string>

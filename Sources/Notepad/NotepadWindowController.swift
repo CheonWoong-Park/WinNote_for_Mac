@@ -166,7 +166,7 @@ final class NotepadWindowController: NSWindowController, NSWindowDelegate, Title
     func confirmSave(_ d: TabDocument, completion: @escaping (Bool) -> Void) {
         guard needsSavePrompt(d) else { completion(true); return }
         if let i = tabs.firstIndex(of: d), i != selectedTabIndex { selectTab(i) }
-        showDialog(title: "메모장", message: "변경 내용을 \(d.title)에 저장하시겠습니까?", primary: "저장", secondary: "저장 안 함", close: "취소") { [weak self] r in
+        showDialog(title: "notepad", message: "변경 내용을 \(d.title)에 저장하시겠습니까?", primary: "저장", secondary: "저장 안 함", close: "취소") { [weak self] r in
             switch r {
             case .primary: self?.save(d) { completion($0) }
             case .secondary: completion(true)
@@ -409,7 +409,7 @@ final class NotepadWindowController: NSWindowController, NSWindowDelegate, Title
 
     func updateTitle() {
         guard let w = window else { return }
-        let t = isSettingsMode ? "설정 - 메모장" : "\(currentDoc?.title ?? "제목 없음") - 메모장"
+        let t = isSettingsMode ? "설정 - notepad" : "\(currentDoc?.title ?? "제목 없음") - notepad"
         w.title = t
         NSApp.changeWindowsItem(w, title: t, filename: false)
         w.representedURL = isSettingsMode ? nil : currentDoc?.url
@@ -501,7 +501,7 @@ final class NotepadWindowController: NSWindowController, NSWindowDelegate, Title
             Settings.shared.noteRecent(url)
         } catch {
             if existing == nil, let d = tabs.last, isBlank(d), tabs.count > 1 { removeTab(tabs.count - 1) }
-            showDialog(title: "메모장", message: "\(url.lastPathComponent)\n파일을 열 수 없습니다.\n\(error.localizedDescription)", primary: "확인") { _ in }
+            showDialog(title: "notepad", message: "\(url.lastPathComponent)\n파일을 열 수 없습니다.\n\(error.localizedDescription)", primary: "확인") { _ in }
         }
     }
 
@@ -543,13 +543,13 @@ final class NotepadWindowController: NSWindowController, NSWindowDelegate, Title
                 AppDelegate.shared.scheduleSessionSave()
                 completion(true)
             } catch {
-                self?.showDialog(title: "메모장", message: "\(url.lastPathComponent)\n파일을 저장할 수 없습니다.\n\(error.localizedDescription)", primary: "확인") { _ in completion(false) }
+                self?.showDialog(title: "notepad", message: "\(url.lastPathComponent)\n파일을 저장할 수 없습니다.\n\(error.localizedDescription)", primary: "확인") { _ in completion(false) }
             }
         }
         if let data = tf.encoded() {
             finish(data)
         } else {
-            showDialog(title: "메모장",
+            showDialog(title: "notepad",
                        message: "이 파일에는 ANSI 인코딩으로 저장하면 손실되는 유니코드 형식의 문자가 있습니다. 이 문자를 유지하려면 [취소]를 클릭한 다음 [인코딩] 드롭다운 목록에서 유니코드 옵션 중 하나를 선택하세요. 계속하시겠습니까?",
                        primary: "확인", close: "취소") { r in
                 if r == .primary, let data = tf.encoded(allowLossy: true) { finish(data) } else { completion(false) }
@@ -710,7 +710,7 @@ final class NotepadWindowController: NSWindowController, NSWindowDelegate, Title
         }
         if r.location == NSNotFound {
             if !incremental {
-                showDialog(title: "메모장", message: "\"\(q)\"을(를) 찾을 수 없습니다.", primary: "확인") { _ in }
+                showDialog(title: "notepad", message: "\"\(q)\"을(를) 찾을 수 없습니다.", primary: "확인") { _ in }
             }
             return false
         }
@@ -747,7 +747,7 @@ final class NotepadWindowController: NSWindowController, NSWindowDelegate, Title
         let result = NSMutableString(string: full)
         let count = result.replaceOccurrences(of: q, with: findBar.replaceBox.stringValue, options: opts, range: NSRange(location: 0, length: result.length))
         guard count > 0 else {
-            showDialog(title: "메모장", message: "\"\(q)\"을(를) 찾을 수 없습니다.", primary: "확인") { _ in }
+            showDialog(title: "notepad", message: "\"\(q)\"을(를) 찾을 수 없습니다.", primary: "확인") { _ in }
             return
         }
         let range = NSRange(location: 0, length: full.length)
@@ -786,7 +786,7 @@ final class NotepadWindowController: NSWindowController, NSWindowDelegate, Title
             if n > lineCount {
                 self?.dialog = nil
                 dlg.removeFromSuperview()
-                self?.showDialog(title: "메모장 - 줄로 이동", message: "줄 번호가 전체 줄 수를 초과합니다.", primary: "확인") { _ in
+                self?.showDialog(title: "notepad - 줄로 이동", message: "줄 번호가 전체 줄 수를 초과합니다.", primary: "확인") { _ in
                     self?.goToLine(nil)
                 }
                 return false
